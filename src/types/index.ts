@@ -4,6 +4,7 @@ export type AccountStatus = 'PENDING' | 'APPROVED' | 'REJECTED' | 'SUSPENDED';
 export interface AuthUser {
   userId: number;
   email: string;
+  name: string;
   role: UserRole;
 }
 

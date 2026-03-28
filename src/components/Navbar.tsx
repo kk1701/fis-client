@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/auth.store';
 
 export default function Navbar() {
-  const { user, status, clearAuth } = useAuthStore();
+  const { user, status, name, clearAuth } = useAuthStore();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -12,14 +12,14 @@ export default function Navbar() {
 
   return (
     <nav className="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between">
-      <div className="flex items-center gap-2">
-        <span className="text-primary font-bold text-lg">FIS</span>
-        <span className="text-gray-400 text-sm hidden sm:block">
+      <div className="flex items-end gap-2">
+        <span className="text-primary font-bold text-4xl">MANIT-FIS</span>
+        <span className="text-gray-500 text-lg hidden sm:block ml-1">
           Faculty Information System
         </span>
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-5 mr-4">
         {/* status badge */}
         {user?.role === 'FACULTY' && (
           <span
@@ -37,13 +37,13 @@ export default function Navbar() {
 
         {/* user info */}
         <div className="text-right hidden sm:block">
-          <p className="text-sm font-medium text-gray-800">{user?.email}</p>
+          <p className="text-sm font-medium text-gray-800">{name}</p>
           <p className="text-xs text-gray-400">{user?.role}</p>
         </div>
 
         <button
           onClick={handleLogout}
-          className="text-sm text-gray-500 hover:text-red-500 transition font-medium"
+          className="text-lg text-gray-500 hover:text-red-500 transition font-medium"
         >
           Logout
         </button>

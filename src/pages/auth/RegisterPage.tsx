@@ -58,11 +58,12 @@ export default function RegisterPage() {
       const user = {
         userId: decoded.sub,
         email: decoded.email,
+        name: decoded.name,
         role: decoded.role as "FACULTY",
       };
 
       // faculty starts as PENDING
-      setAuth(token, user, "PENDING");
+      setAuth(token, user, "PENDING", data.name);
       navigate("/faculty/profile");
     } catch (err: any) {
       setServerError(err.response?.data?.message ?? "Registration failed");

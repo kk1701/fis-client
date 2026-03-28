@@ -38,6 +38,7 @@ export default function LoginPage() {
       const user = {
         userId: decoded.sub,
         email: decoded.email,
+        name: decoded.name,
         role: decoded.role as "ADMIN" | "FACULTY",
       };
 
@@ -45,8 +46,8 @@ export default function LoginPage() {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      setAuth(token, user, meRes.data.status);
-    //   setAuth(token, user, "APPROVED"); // temporary
+      setAuth(token, user, meRes.data.status, meRes.data.faculty?.name);
+      // setAuth(token, user, "APPROVED"); // temporary
 
       if (user.role === "ADMIN") {
         navigate("/admin/dashboard");

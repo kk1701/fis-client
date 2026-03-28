@@ -2,9 +2,8 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuthStore } from "./store/auth.store";
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
+import FacultyDashboard from "./pages/faculty/FacultyDashboard";
 
-// placeholder pages — will be replaced as we build them
-const FacultyDashboard = () => <div>Faculty Dashboard</div>;
 const AdminDashboard = () => <div>Admin Dashboard</div>;
 
 function ProtectedRoute({

@@ -2,6 +2,7 @@
 export function decodeToken(token: string): {
   sub: number;
   email: string;
+  name: string;
   role: string;
   exp: number;
 } | null {

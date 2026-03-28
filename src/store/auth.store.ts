@@ -6,8 +6,9 @@ interface AuthState {
   user: AuthUser | null;
   token: string | null;
   status: AccountStatus | null;
+  name: string | null;
 
-  setAuth: (token: string, user: AuthUser, status: AccountStatus) => void;
+  setAuth: (token: string, user: AuthUser, status: AccountStatus, name: string) => void;
   clearAuth: () => void;
   isAuthenticated: () => boolean;
 }
@@ -18,26 +19,22 @@ export const useAuthStore = create<AuthState>()(
       user: null,
       token: null,
       status: null,
+      name: null,
 
-      setAuth: (token, user, status) => {
+      setAuth: (token, user, status, name) => {
         localStorage.setItem('access_token', token);
-        set({ token, user, status });
+        set({ token, user, status, name });
       },
 
       clearAuth: () => {
         localStorage.removeItem('access_token');
-        set({ token: null, user: null, status: null });
+        set({ token: null, user: null, status: null, name: null });
       },
 
       isAuthenticated: () => !!get().token,
     }),
     {
-      name: 'fis-auth', // persists to localStorage
-      partialize: (state) => ({
-        token: state.token,
-        user: state.user,
-        status: state.status,
-      }),
+      name: 'fis-auth',
     }
   )
 );
