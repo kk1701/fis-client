@@ -210,7 +210,7 @@ export default function CoursesPage() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">Credits</label>
                 <input
                   type="number"
-                  {...register('credits')}
+                  {...register('credits', { valueAsNumber: true })}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
                 />
               </div>

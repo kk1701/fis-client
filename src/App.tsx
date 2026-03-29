@@ -1,10 +1,15 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuthStore } from "./store/auth.store";
-import LoginPage from './pages/auth/LoginPage';
-import RegisterPage from './pages/auth/RegisterPage';
+import LoginPage from "./pages/auth/LoginPage";
+import RegisterPage from "./pages/auth/RegisterPage";
 import FacultyDashboard from "./pages/faculty/FacultyDashboard";
+import AdminLayout from "./pages/admin/AdminLayout";
+import DashboardPage from "./pages/admin/DashboardPage";
+import ApprovalsPage from "./pages/admin/ApprovalsPage";
+import FacultyListPage from "./pages/admin/FacultyListPage";
+import DepartmentsPage from "./pages/admin/DepartmentsPage";
+import CoursesPage from "./pages/admin/CoursesPage";
 
-const AdminDashboard = () => <div>Admin Dashboard</div>;
 
 function ProtectedRoute({
   children,
@@ -40,13 +45,20 @@ export default function App() {
 
       {/* admin */}
       <Route
-        path="/admin/*"
+        path="/admin"
         element={
           <ProtectedRoute role="ADMIN">
-            <AdminDashboard />
+            <AdminLayout />
           </ProtectedRoute>
         }
-      />
+      >
+        <Route path="dashboard" element={<DashboardPage />} />
+        <Route path="approvals" element={<ApprovalsPage />} />
+        <Route path="faculty" element={<FacultyListPage />} />
+        <Route path="departments" element={<DepartmentsPage />} />
+        <Route path="courses" element={<CoursesPage />} />
+        <Route index element={<Navigate to="/admin/dashboard" replace />} />
+      </Route>
 
       {/* fallback */}
       <Route path="*" element={<Navigate to="/login" replace />} />
