@@ -10,6 +10,7 @@ import CoursesTab from './tabs/CoursesTab';
 import ExperiencesTab from './tabs/ExperiencesTab';
 import PublicationsTab from './tabs/PublicationsTab';
 import EducationTab from './tabs/EducationTab';
+import SupervisionTab from './tabs/SupervisionTab';
 
 const TABS = [
   { key: 'personal', label: 'Personal Info' },
@@ -18,6 +19,7 @@ const TABS = [
   { key: 'courses', label: 'Courses Taught' },
   { key: 'experiences', label: 'Experience' },
   { key: 'publications', label: 'Publications' },
+  { key: 'supervision', label: 'Thesis & Dissertations' },
 ];
 
 export default function FacultyDashboard() {
@@ -35,6 +37,7 @@ export default function FacultyDashboard() {
       case 'courses':      return <CoursesTab />;
       case 'experiences':  return <ExperiencesTab />;
       case 'publications': return <PublicationsTab />;
+      case 'supervision':  return <SupervisionTab />;
       default:             return <PersonalInfoTab />;
     }
   };
