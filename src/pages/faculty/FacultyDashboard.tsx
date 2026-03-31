@@ -9,10 +9,12 @@ import AcademicProfileTab from './tabs/AcademicProfileTab';
 import CoursesTab from './tabs/CoursesTab';
 import ExperiencesTab from './tabs/ExperiencesTab';
 import PublicationsTab from './tabs/PublicationsTab';
+import EducationTab from './tabs/EducationTab';
 
 const TABS = [
   { key: 'personal', label: 'Personal Info' },
   { key: 'academic', label: 'Academic Profile' },
+  { key: 'education', label: 'Education' }, 
   { key: 'courses', label: 'Courses Taught' },
   { key: 'experiences', label: 'Experience' },
   { key: 'publications', label: 'Publications' },
@@ -29,6 +31,7 @@ export default function FacultyDashboard() {
     switch (activeTab) {
       case 'personal':     return <PersonalInfoTab />;
       case 'academic':     return <AcademicProfileTab />;
+      case 'education':    return <EducationTab />;
       case 'courses':      return <CoursesTab />;
       case 'experiences':  return <ExperiencesTab />;
       case 'publications': return <PublicationsTab />;
