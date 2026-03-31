@@ -9,6 +9,7 @@ import ApprovalsPage from "./pages/admin/ApprovalsPage";
 import FacultyListPage from "./pages/admin/FacultyListPage";
 import DepartmentsPage from "./pages/admin/DepartmentsPage";
 import CoursesPage from "./pages/admin/CoursesPage";
+import LandingPage from "./pages/LandingPage";
 
 
 function ProtectedRoute({
@@ -30,8 +31,10 @@ export default function App() {
   return (
     <Routes>
       {/* public */}
+      <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/directory" element={<div>Directory — coming soon</div>} />
 
       {/* faculty */}
       <Route
@@ -61,7 +64,7 @@ export default function App() {
       </Route>
 
       {/* fallback */}
-      <Route path="*" element={<Navigate to="/login" replace />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }
