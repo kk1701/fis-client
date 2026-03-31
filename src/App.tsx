@@ -11,6 +11,7 @@ import DepartmentsPage from "./pages/admin/DepartmentsPage";
 import CoursesPage from "./pages/admin/CoursesPage";
 import LandingPage from "./pages/LandingPage";
 import DirectoryPage from "./pages/directory/DirectoryPage";
+import PublicProfilePage from "./pages/directory/PublicProfilePage";
 
 
 function ProtectedRoute({
@@ -36,6 +37,7 @@ export default function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/directory" element={<DirectoryPage />} />
+      <Route path="/directory/:id" element={<PublicProfilePage />} />
 
       {/* faculty */}
       <Route
