@@ -8,7 +8,7 @@ export default function AdminLayout() {
       <Navbar />
       <div className="flex">
         <AdminSidebar />
-        <main className="flex-1 p-6 max-w-6xl">
+        <main className="flex-1 p-6 max-w-6xl overflow-hidden">
           <Outlet />
         </main>
       </div>
