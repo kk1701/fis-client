@@ -3,7 +3,7 @@ import Tabs from '../../components/Tabs';
 import ResearchDomainsReport from './reports/ResearchDomainsReport';
 import PublicationTrendsReport from './reports/PublicationTrendsReport';
 import DepartmentHealthReport from './reports/DepartmentHealthReport';
-// import ResearchMomentumReport from './reports/ResearchMomentumReport';
+import ResearchMomentumReport from './reports/ResearchMomentumReport';
 // import QualificationReport from './reports/QualificationReport';
 // import ExperienceProfileReport from './reports/ExperienceProfileReport';
 // import CourseLoadReport from './reports/CourseLoadReport';
@@ -28,7 +28,7 @@ export default function AnalyticsPage() {
       case 'domains':      return <ResearchDomainsReport />;
       case 'publications': return <PublicationTrendsReport />;
       case 'health':       return <DepartmentHealthReport />;
-    //   case 'momentum':     return <ResearchMomentumReport />;
+      case 'momentum':     return <ResearchMomentumReport />;
     //   case 'qualifications': return <QualificationReport />;
     //   case 'experience':   return <ExperienceProfileReport />;
     //   case 'courseload':   return <CourseLoadReport />;
