@@ -12,6 +12,7 @@ import CoursesPage from "./pages/admin/CoursesPage";
 import LandingPage from "./pages/LandingPage";
 import DirectoryPage from "./pages/directory/DirectoryPage";
 import PublicProfilePage from "./pages/directory/PublicProfilePage";
+import AnalyticsPage from "./pages/admin/AnalyticsPage";
 
 
 function ProtectedRoute({
@@ -63,6 +64,7 @@ export default function App() {
         <Route path="faculty" element={<FacultyListPage />} />
         <Route path="departments" element={<DepartmentsPage />} />
         <Route path="courses" element={<CoursesPage />} />
+        <Route path="analytics" element={<AnalyticsPage />} />
         <Route index element={<Navigate to="/admin/dashboard" replace />} />
       </Route>
 

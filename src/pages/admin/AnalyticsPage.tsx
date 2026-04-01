@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Tabs from '../../components/Tabs';
-// import ResearchDomainsReport from './reports/ResearchDomainsReport';
+import ResearchDomainsReport from './reports/ResearchDomainsReport';
 // import PublicationTrendsReport from './reports/PublicationTrendsReport';
 // import DepartmentHealthReport from './reports/DepartmentHealthReport';
 // import ResearchMomentumReport from './reports/ResearchMomentumReport';
@@ -25,7 +25,7 @@ export default function AnalyticsPage() {
 
   const renderReport = () => {
     switch (activeTab) {
-    //   case 'domains':      return <ResearchDomainsReport />;
+      case 'domains':      return <ResearchDomainsReport />;
     //   case 'publications': return <PublicationTrendsReport />;
     //   case 'health':       return <DepartmentHealthReport />;
     //   case 'momentum':     return <ResearchMomentumReport />;
@@ -33,7 +33,7 @@ export default function AnalyticsPage() {
     //   case 'experience':   return <ExperienceProfileReport />;
     //   case 'courseload':   return <CourseLoadReport />;
     //   case 'supervision':  return <SupervisionPipelineReport />;
-    //   default:             return <ResearchDomainsReport />;
+      default:             return <ResearchDomainsReport />;
     }
   };
 
@@ -50,7 +50,7 @@ export default function AnalyticsPage() {
         <Tabs tabs={TABS} activeTab={activeTab} onChange={setActiveTab} />
       </div>
 
-      {/* <div>{renderReport()}</div> */}
+      <div>{renderReport()}</div>
     </div>
   );
 }
