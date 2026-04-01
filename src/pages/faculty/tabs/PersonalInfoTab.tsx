@@ -8,6 +8,7 @@ import {
   getAddressesApi,
   upsertAddressApi,
   deleteAddressApi,
+  uploadProfilePictureApi,
 } from "../../../api/faculty.api";
 
 const personalSchema = z.object({
@@ -18,7 +19,6 @@ const personalSchema = z.object({
   category: z.string().optional(),
   dob: z.string().optional(),
   orcidId: z.string().optional(),
-  photoUrl: z.string().url("Must be a valid URL").optional().or(z.literal("")),
 });
 
 const addressSchema = z.object({
@@ -409,6 +409,10 @@ export default function PersonalInfoTab() {
   const [serverError, setServerError] = useState("");
   const [addresses, setAddresses] = useState<Address[]>([]);
 
+  const [photoUrl, setPhotoUrl] = useState("");
+  const [uploadingPhoto, setUploadingPhoto] = useState(false);
+  const [photoError, setPhotoError] = useState("");
+
   const {
     register,
     handleSubmit,
@@ -425,6 +429,7 @@ export default function PersonalInfoTab() {
     Promise.all([getOwnProfileApi(), getAddressesApi()])
       .then(([profileRes, addressRes]) => {
         const f = profileRes.data;
+        setPhotoUrl(f.photoUrl ?? "");
         reset({
           name: f.name ?? "",
           mobile: f.mobile ?? "",
@@ -433,7 +438,6 @@ export default function PersonalInfoTab() {
           category: f.category ?? "",
           dob: f.dob ? f.dob.split("T")[0] : "",
           orcidId: f.orcidId ?? "",
-          photoUrl: f.photoUrl ?? "",
         });
         setAddresses(addressRes.data);
       })
@@ -566,20 +570,72 @@ export default function PersonalInfoTab() {
               />
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Photo URL
+            {/* photo upload */}
+            <div className="sm:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Profile Picture
               </label>
-              <input
-                {...register("photoUrl")}
-                placeholder="https://..."
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
-              />
-              {errors.photoUrl && (
-                <p className="text-red-500 text-xs mt-1">
-                  {errors.photoUrl.message}
-                </p>
-              )}
+              <div className="flex items-center gap-4">
+                {/* preview */}
+                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-gray-200 shrink-0 bg-gray-100 flex items-center justify-center">
+                  {photoUrl ? (
+                    <img
+                      src={photoUrl}
+                      alt="Profile"
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-2xl text-gray-300">👤</span>
+                  )}
+                </div>
+
+                {/* upload */}
+                <div className="flex-1">
+                  <label className="cursor-pointer">
+                    <div className="flex items-center gap-2 border border-dashed border-gray-300 rounded-lg px-4 py-3 hover:border-primary hover:bg-blue-50 transition">
+                      <span className="text-sm text-gray-500">
+                        {uploadingPhoto
+                          ? "Uploading..."
+                          : "Click to upload JPG, JPEG or PNG"}
+                      </span>
+                      <span className="text-xs text-gray-400 ml-auto">
+                        Max 2MB
+                      </span>
+                    </div>
+                    <input
+                      type="file"
+                      accept=".jpg,.jpeg,.png"
+                      className="sr-only"
+                      disabled={uploadingPhoto}
+                      onChange={async (e) => {
+                        const file = e.target.files?.[0];
+                        if (!file) return;
+                        try {
+                          setUploadingPhoto(true);
+                          setPhotoError("");
+                          const res = await uploadProfilePictureApi(file);
+                          setPhotoUrl(res.data.photoUrl);
+                        } catch (err: any) {
+                          setPhotoError(
+                            err.response?.data?.message ?? "Upload failed",
+                          );
+                        } finally {
+                          setUploadingPhoto(false);
+                          e.target.value = ""; // reset input
+                        }
+                      }}
+                    />
+                  </label>
+                  {photoError && (
+                    <p className="text-red-500 text-xs mt-1">{photoError}</p>
+                  )}
+                  {photoUrl && !uploadingPhoto && (
+                    <p className="text-green-600 text-xs mt-1">
+                      ✓ Profile picture uploaded
+                    </p>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
 
