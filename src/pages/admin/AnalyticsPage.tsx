@@ -6,7 +6,7 @@ import DepartmentHealthReport from './reports/DepartmentHealthReport';
 import ResearchMomentumReport from './reports/ResearchMomentumReport';
 import QualificationReport from './reports/QualificationReport';
 // import ExperienceProfileReport from './reports/ExperienceProfileReport';
-// import CourseLoadReport from './reports/CourseLoadReport';
+import CourseLoadReport from './reports/CourseLoadReport';
 // import SupervisionPipelineReport from './reports/SupervisionPipelineReport';
 
 const TABS = [
@@ -31,7 +31,7 @@ export default function AnalyticsPage() {
       case 'momentum':     return <ResearchMomentumReport />;
       case 'qualifications': return <QualificationReport />;
     //   case 'experience':   return <ExperienceProfileReport />;
-    //   case 'courseload':   return <CourseLoadReport />;
+      case 'courseload':   return <CourseLoadReport />;
     //   case 'supervision':  return <SupervisionPipelineReport />;
       default:             return <ResearchDomainsReport />;
     }
