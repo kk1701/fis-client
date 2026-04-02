@@ -13,6 +13,9 @@ import LandingPage from "./pages/LandingPage";
 import DirectoryPage from "./pages/directory/DirectoryPage";
 import PublicProfilePage from "./pages/directory/PublicProfilePage";
 import AnalyticsPage from "./pages/admin/AnalyticsPage";
+import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
+import VerifyOTPPage from "./pages/auth/VerifyOtpPage";
+import ResetPasswordPage from "./pages/auth/ResetPasswordPage";
 
 
 function ProtectedRoute({
@@ -39,6 +42,9 @@ export default function App() {
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/directory" element={<DirectoryPage />} />
       <Route path="/directory/:id" element={<PublicProfilePage />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      <Route path="/verify-otp" element={<VerifyOTPPage />} />
+      <Route path="/reset-password" element={<ResetPasswordPage />} />
 
       {/* faculty */}
       <Route
