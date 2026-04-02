@@ -12,7 +12,7 @@ import { z } from 'zod';
 import type { CourseCatalog, FacultyCourse } from '../../../types';
 
 const schema = z.object({
-  catalogCourseId: z.number({ error: 'Select a course' }).min(1),
+  courseId: z.number({ error: 'Select a course' }).min(1),
   semester: z.string().min(1, 'Semester is required'),
   academicYear: z.string().min(1, 'Academic year is required'),
   role: z.enum(['LECTURER', 'COORDINATOR', 'LAB']),
@@ -71,7 +71,7 @@ export default function CoursesTab() {
   const openEdit = (c: FacultyCourse) => {
     setEditingId(c.id);
     reset({
-      catalogCourseId: c.catalogCourseId,
+      courseId: c.catalogCourseId,
       semester: c.semester,
       academicYear: c.academicYear,
       role: c.role as any,
@@ -161,7 +161,7 @@ export default function CoursesTab() {
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Course</label>
                 <select
-                  {...register('catalogCourseId', { valueAsNumber: true })}
+                  {...register('courseId', { valueAsNumber: true })}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary bg-white"
                 >
                   <option value="">Select course</option>
@@ -171,8 +171,8 @@ export default function CoursesTab() {
                     </option>
                   ))}
                 </select>
-                {errors.catalogCourseId && (
-                  <p className="text-red-500 text-xs mt-1">{errors.catalogCourseId.message}</p>
+                {errors.courseId && (
+                  <p className="text-red-500 text-xs mt-1">{errors.courseId.message}</p>
                 )}
               </div>
 
@@ -227,7 +227,7 @@ export default function CoursesTab() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">Hours/Week</label>
                 <input
                   type="number"
-                  {...register('hoursPerWeek')}
+                  {...register('hoursPerWeek', { valueAsNumber: true })}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
                 />
               </div>
