@@ -58,7 +58,7 @@ export default function ResearchMomentumReport() {
   };
 
   const chartData = data.slice(0, 12).map((f) => ({
-    name: f.name.split(" ").slice(-1)[0], // last name only for chart
+    name: f.name,
     fullName: f.name,
     score: f.momentumScore,
   }));
