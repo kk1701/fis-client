@@ -14,7 +14,7 @@ import DirectoryPage from "./pages/directory/DirectoryPage";
 import PublicProfilePage from "./pages/directory/PublicProfilePage";
 import AnalyticsPage from "./pages/admin/AnalyticsPage";
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
-import VerifyOTPPage from "./pages/auth/VerifyOtpPage";
+import VerifyOTPPage from "./pages/auth/VerifyOTPPage";
 import ResetPasswordPage from "./pages/auth/ResetPasswordPage";
 
 
