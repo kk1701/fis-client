@@ -1,18 +1,15 @@
 import { useEffect, useState } from "react";
-import {
-  PieChart,
-  Pie,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
+import { PieChart, Pie, Tooltip, ResponsiveContainer } from "recharts";
 import { getQualificationDistributionApi } from "../../../api/analytics.api";
 import { downloadPDF } from "../../../utils/pdf";
+import PublishReportModal from "../../../components/PublishReportModal";
 
 const COLORS = ["#1a1a2e", "#c8491a", "#6b6b8a", "#a0a0c0"];
 
 export default function QualificationReport() {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [showPublish, setShowPublish] = useState(false);
 
   useEffect(() => {
     getQualificationDistributionApi()
@@ -68,7 +65,7 @@ export default function QualificationReport() {
   ].filter((d) => d.value > 0);
 
   return (
-    <div className="space-y-4">
+    <div>
       <div className="bg-white rounded-2xl shadow-sm p-6">
         <div className="flex items-center justify-between mb-6">
           <div>
@@ -80,12 +77,20 @@ export default function QualificationReport() {
               department
             </p>
           </div>
-          <button
-            onClick={handlePDF}
-            className="bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-700 transition"
-          >
-            ⬇ Download PDF
-          </button>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setShowPublish(true)}
+              className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition"
+            >
+              🌐 Publish
+            </button>
+            <button
+              onClick={handlePDF}
+              className="bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-700 transition"
+            >
+              ⬇ Download PDF
+            </button>
+          </div>
         </div>
 
         <div className="grid grid-cols-2 gap-6">
@@ -176,6 +181,15 @@ export default function QualificationReport() {
           </tbody>
         </table>
       </div>
+
+      {showPublish && (
+        <PublishReportModal
+          reportType="RESEARCH_DOMAINS"
+          defaultTitle="Research Domain Profiling"
+          data={data}
+          onClose={() => setShowPublish(false)}
+        />
+      )}
     </div>
   );
 }

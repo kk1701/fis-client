@@ -11,10 +11,12 @@ import {
 } from "recharts";
 import { getSupervisionPipelineApi } from "../../../api/analytics.api";
 import { downloadPDF } from "../../../utils/pdf";
+import PublishReportModal from "../../../components/PublishReportModal";
 
 export default function SupervisionPipelineReport() {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [showPublish, setShowPublish] = useState(false);
 
   useEffect(() => {
     getSupervisionPipelineApi()
@@ -54,7 +56,7 @@ export default function SupervisionPipelineReport() {
     );
 
   return (
-    <div className="space-y-4">
+    <div>
       <div className="bg-white rounded-2xl shadow-sm p-6">
         <div className="flex items-center justify-between mb-6">
           <div>
@@ -65,12 +67,20 @@ export default function SupervisionPipelineReport() {
               Thesis and dissertation supervision activity per department
             </p>
           </div>
-          <button
-            onClick={handlePDF}
-            className="bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-700 transition"
-          >
-            ⬇ Download PDF
-          </button>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setShowPublish(true)}
+              className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition"
+            >
+              🌐 Publish
+            </button>
+            <button
+              onClick={handlePDF}
+              className="bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-700 transition"
+            >
+              ⬇ Download PDF
+            </button>
+          </div>
         </div>
 
         <ResponsiveContainer width="100%" height={300}>
@@ -155,6 +165,15 @@ export default function SupervisionPipelineReport() {
           </tbody>
         </table>
       </div>
+
+      {showPublish && (
+        <PublishReportModal
+          reportType="RESEARCH_DOMAINS"
+          defaultTitle="Research Domain Profiling"
+          data={data}
+          onClose={() => setShowPublish(false)}
+        />
+      )}
     </div>
   );
 }

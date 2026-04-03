@@ -10,10 +10,12 @@ import {
 } from "recharts";
 import { getDepartmentHealthApi } from "../../../api/analytics.api";
 import { downloadPDF } from "../../../utils/pdf";
+import PublishReportModal from "../../../components/PublishReportModal";
 
 export default function DepartmentHealthReport() {
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showPublish, setShowPublish] = useState(false);
 
   useEffect(() => {
     getDepartmentHealthApi()
@@ -61,7 +63,7 @@ export default function DepartmentHealthReport() {
     );
 
   return (
-    <div className="space-y-4">
+    <div>
       <div className="bg-white rounded-2xl shadow-sm p-6">
         <div className="flex items-center justify-between mb-6">
           <div>
@@ -73,12 +75,20 @@ export default function DepartmentHealthReport() {
               and research activity
             </p>
           </div>
-          <button
-            onClick={handlePDF}
-            className="bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-700 transition"
-          >
-            ⬇ Download PDF
-          </button>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setShowPublish(true)}
+              className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition"
+            >
+              🌐 Publish
+            </button>
+            <button
+              onClick={handlePDF}
+              className="bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-700 transition"
+            >
+              ⬇ Download PDF
+            </button>
+          </div>
         </div>
 
         <ResponsiveContainer width="100%" height={280}>
@@ -150,6 +160,15 @@ export default function DepartmentHealthReport() {
           </tbody>
         </table>
       </div>
+
+      {showPublish && (
+        <PublishReportModal
+          reportType="RESEARCH_DOMAINS"
+          defaultTitle="Research Domain Profiling"
+          data={data}
+          onClose={() => setShowPublish(false)}
+        />
+      )}
     </div>
   );
 }
