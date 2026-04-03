@@ -8,6 +8,7 @@ import { decodeToken } from "../../utils/jwt";
 import { useEffect, useState } from "react";
 import api from "../../api/axios";
 import type { Department } from "../../types";
+import { EyeIcon } from "../../components/EyeIcon";
 
 const schema = z
   .object({
@@ -15,9 +16,7 @@ const schema = z
     email: z.string().email("Invalid email"),
     password: z.string().min(6, "Password must be at least 6 characters"),
     confirmPassword: z.string(),
-    departmentId: z
-      .number({ error: "Please select a department" })
-      .min(1),
+    departmentId: z.number({ error: "Please select a department" }).min(1),
   })
   .refine((d) => d.password === d.confirmPassword, {
     message: "Passwords do not match",
@@ -31,6 +30,8 @@ export default function RegisterPage() {
   const setAuth = useAuthStore((s) => s.setAuth);
   const [serverError, setServerError] = useState("");
   const [departments, setDepartments] = useState<Department[]>([]);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   // fetch departments for dropdown
   useEffect(() => {
@@ -124,7 +125,7 @@ export default function RegisterPage() {
               Department
             </label>
             <select
-              {...register("departmentId", {valueAsNumber: true})}
+              {...register("departmentId", { valueAsNumber: true })}
               className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white"
             >
               <option value="">Select department</option>
@@ -146,12 +147,21 @@ export default function RegisterPage() {
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Password
             </label>
-            <input
-              type="password"
-              {...register("password")}
-              placeholder="••••••••"
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                {...register("password")}
+                placeholder="••••••••"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              >
+                <EyeIcon open={showPassword} />
+              </button>
+            </div>
             {errors.password && (
               <p className="text-red-500 text-xs mt-1">
                 {errors.password.message}
@@ -164,12 +174,21 @@ export default function RegisterPage() {
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Confirm Password
             </label>
-            <input
-              type="password"
-              {...register("confirmPassword")}
-              placeholder="••••••••"
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-            />
+            <div className="relative">
+              <input
+                type={showConfirm ? "text" : "password"}
+                {...register("confirmPassword")}
+                placeholder="••••••••"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+              <button
+                type="button"
+                onClick={() => setShowConfirm(!showConfirm)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              >
+                <EyeIcon open={showConfirm} />
+              </button>
+            </div>
             {errors.confirmPassword && (
               <p className="text-red-500 text-xs mt-1">
                 {errors.confirmPassword.message}
