@@ -7,6 +7,7 @@ const NAV_ITEMS = [
   { to: '/admin/departments', label: 'Departments', icon: '🏛️' },
   { to: '/admin/courses', label: 'Courses', icon: '📚' },
   { to: '/admin/analytics', label: 'Analytics', icon: '📈' },
+  { to: '/admin/published-reports', label: 'Published Reports', icon: '🌐' },
 ];
 
 export default function AdminSidebar() {

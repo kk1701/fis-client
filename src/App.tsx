@@ -16,6 +16,7 @@ import AnalyticsPage from "./pages/admin/AnalyticsPage";
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
 import VerifyOTPPage from "./pages/auth/VerifyOTPPage";
 import ResetPasswordPage from "./pages/auth/ResetPasswordPage";
+import PublishedReportsPage from "./pages/admin/PublishedReportsPage";
 
 
 function ProtectedRoute({
@@ -71,6 +72,7 @@ export default function App() {
         <Route path="departments" element={<DepartmentsPage />} />
         <Route path="courses" element={<CoursesPage />} />
         <Route path="analytics" element={<AnalyticsPage />} />
+        <Route path="published-reports" element={<PublishedReportsPage />} />
         <Route index element={<Navigate to="/admin/dashboard" replace />} />
       </Route>
 
