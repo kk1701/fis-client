@@ -27,3 +27,10 @@ export const getCourseLoadApi = (academicYear?: string) =>
 
 export const getSupervisionPipelineApi = () =>
   api.get('/admin/analytics/supervision-pipeline');
+
+export const publishReportApi = (data: {
+  title: string;
+  description?: string;
+  reportType: string;
+  data: any;
+}) => api.post('/admin/published-reports', data);
