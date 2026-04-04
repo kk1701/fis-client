@@ -18,6 +18,7 @@ import VerifyOTPPage from "./pages/auth/VerifyOTPPage";
 import ResetPasswordPage from "./pages/auth/ResetPasswordPage";
 import PublishedReportsPage from "./pages/admin/PublishedReportsPage";
 import PublicReportsPage from "./pages/reports/PublicReportsPage";
+import PublicReportDetailPage from "./pages/reports/PublicReportDetailPage";
 
 
 function ProtectedRoute({
@@ -49,6 +50,8 @@ export default function App() {
       <Route path="/directory" element={<DirectoryPage />} />
       <Route path="/directory/:id" element={<PublicProfilePage />} />
       <Route path="/reports" element={<PublicReportsPage />} />
+      <Route path="/reports/:id" element={<PublicReportDetailPage />} />
+
 
 
       {/* faculty */}
