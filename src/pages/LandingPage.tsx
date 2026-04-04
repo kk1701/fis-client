@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
+import { Link } from "react-router-dom";
+import { useEffect, useRef } from "react";
 
 export default function LandingPage() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -9,20 +9,19 @@ export default function LandingPage() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
+            entry.target.classList.add("animate-in");
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
-    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
   return (
     <div className="landing">
-
       {/* ── Navbar ───────────────────────────────────── */}
       <nav className="landing-nav">
         <div className="nav-inner">
@@ -31,9 +30,18 @@ export default function LandingPage() {
             <span className="brand-name">FIS</span>
           </div>
           <div className="nav-links">
-            <Link to="/directory" className="nav-link">Faculty Directory</Link>
-            <Link to="/login" className="nav-link">Login</Link>
-            <Link to="/register" className="nav-cta">Register</Link>
+            <Link to="/directory" className="nav-link">
+              Faculty Directory
+            </Link>
+            <Link to="/reports" className="nav-link">
+              Research Reports
+            </Link>
+            <Link to="/login" className="nav-link">
+              Login
+            </Link>
+            <Link to="/register" className="nav-cta">
+              Register
+            </Link>
           </div>
         </div>
       </nav>
@@ -46,13 +54,16 @@ export default function LandingPage() {
             <span className="eyebrow-pill">Faculty Information System</span>
           </div>
           <h1 className="hero-title reveal">
-            One platform.<br />
-            Every faculty.<br />
+            One platform.
+            <br />
+            Every faculty.
+            <br />
             <span className="title-accent">Every insight.</span>
           </h1>
           <p className="hero-sub reveal">
-            A unified system for managing faculty profiles, academic contributions,
-            research output, and institutional analytics — built for modern universities.
+            A unified system for managing faculty profiles, academic
+            contributions, research output, and institutional analytics — built
+            for modern universities.
           </p>
           <div className="hero-actions reveal">
             <Link to="/directory" className="btn-primary">
@@ -70,18 +81,31 @@ export default function LandingPage() {
           <div className="stat-card">
             <span className="stat-icon">🎓</span>
             <span className="stat-label">Academic Profiles</span>
-            <span className="stat-desc">Complete faculty records with qualifications & experience</span>
+            <span className="stat-desc">
+              Complete faculty records with qualifications & experience
+            </span>
           </div>
           <div className="stat-card stat-card--accent">
             <span className="stat-icon">📊</span>
             <span className="stat-label">Smart Analytics</span>
-            <span className="stat-desc">Research domain mapping, publication trends & department insights</span>
+            <span className="stat-desc">
+              Research domain mapping, publication trends & department insights
+            </span>
           </div>
           <div className="stat-card">
+            <span className="stat-icon">🌐</span>
+            <span className="stat-label">Public Reports</span>
+            <span className="stat-desc">
+              Institutional research reports published for transparency
+            </span>
+          </div>
+          {/* <div className="stat-card">
             <span className="stat-icon">🔬</span>
             <span className="stat-label">Research Tracking</span>
-            <span className="stat-desc">Journal, conference, books & supervision records</span>
-          </div>
+            <span className="stat-desc">
+              Journal, conference, books & supervision records
+            </span>
+          </div> */}
         </div>
       </section>
 
@@ -95,7 +119,11 @@ export default function LandingPage() {
 
           <div className="features-grid">
             {FEATURES.map((f, i) => (
-              <div className="feature-card reveal" key={i} style={{ animationDelay: `${i * 80}ms` }}>
+              <div
+                className="feature-card reveal"
+                key={i}
+                style={{ animationDelay: `${i * 80}ms` }}
+              >
                 <div className="feature-icon">{f.icon}</div>
                 <h3 className="feature-title">{f.title}</h3>
                 <p className="feature-desc">{f.desc}</p>
@@ -110,7 +138,9 @@ export default function LandingPage() {
         <div className="cta-inner">
           <div className="cta-text">
             <h2 className="cta-title">Ready to get started?</h2>
-            <p className="cta-sub">Join your institution's faculty network today.</p>
+            <p className="cta-sub">
+              Join your institution's faculty network today.
+            </p>
           </div>
           <div className="cta-actions">
             <Link to="/register" className="btn-primary btn-large">
@@ -119,6 +149,9 @@ export default function LandingPage() {
             </Link>
             <Link to="/directory" className="btn-ghost-light">
               Browse Directory
+            </Link>
+            <Link to="/reports" className="btn-ghost-light">
+              View Reports
             </Link>
           </div>
         </div>
@@ -134,6 +167,7 @@ export default function LandingPage() {
           </div>
           <div className="footer-links">
             <Link to="/directory">Directory</Link>
+            <Link to="/reports">Reports</Link>
             <Link to="/login">Login</Link>
             <Link to="/register">Register</Link>
           </div>
@@ -148,34 +182,39 @@ export default function LandingPage() {
 
 const FEATURES = [
   {
-    icon: '👤',
-    title: 'Complete Profiles',
-    desc: 'Personal info, academic qualifications, designations and specializations in one view.',
+    icon: "👤",
+    title: "Complete Profiles",
+    desc: "Personal info, academic qualifications, designations and specializations in one view.",
   },
   {
-    icon: '📚',
-    title: 'Publication Records',
-    desc: 'Journal articles, conference papers, books and book chapters with DOI and indexing.',
+    icon: "📚",
+    title: "Publication Records",
+    desc: "Journal articles, conference papers, books and book chapters with DOI and indexing.",
   },
   {
-    icon: '🏛️',
-    title: 'Department Management',
-    desc: 'Organize faculty by departments with course catalog and assignment tracking.',
+    icon: "🏛️",
+    title: "Department Management",
+    desc: "Organize faculty by departments with course catalog and assignment tracking.",
   },
   {
-    icon: '🧑‍🏫',
-    title: 'Teaching History',
-    desc: 'Course-wise teaching records with semester, academic year, role and hours.',
+    icon: "🧑‍🏫",
+    title: "Teaching History",
+    desc: "Course-wise teaching records with semester, academic year, role and hours.",
   },
   {
-    icon: '🔍',
-    title: 'Public Directory',
-    desc: 'Open faculty directory with search, department and research domain filters.',
+    icon: "🔍",
+    title: "Public Directory",
+    desc: "Open faculty directory with search, department and research domain filters.",
   },
   {
-    icon: '📈',
-    title: 'Institutional Analytics',
-    desc: 'Research momentum, publication trends, dept health scores and more — exportable as PDF.',
+    icon: "📈",
+    title: "Institutional Analytics",
+    desc: "Research momentum, publication trends, dept health scores and more — exportable as PDF.",
+  },
+  {
+    icon: "🌐",
+    title: "Public Research Reports",
+    desc: "Admin-curated institutional reports published for the public — research domains, qualification stats and more.",
   },
 ];
 
