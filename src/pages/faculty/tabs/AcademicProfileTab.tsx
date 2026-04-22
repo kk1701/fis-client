@@ -31,7 +31,7 @@ export default function AcademicProfileTab() {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { },
   } = useForm<AcademicForm>({ resolver: zodResolver(schema) });
 
   useEffect(() => {
